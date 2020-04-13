@@ -1,3 +1,5 @@
+import { AuthService } from './../../_services/auth.service';
+import { UserService } from './../../_services/user.service';
 import { AlertifyService } from './../../_services/alertify.service';
 import { User } from './../../_models/user';
 import { ActivatedRoute } from '@angular/router';
@@ -19,7 +21,8 @@ if (this.editForm.dirty) {
 }
 }
 
-  constructor(private route: ActivatedRoute, private alertify: AlertifyService) { }
+  constructor(private route: ActivatedRoute, private alertify: AlertifyService,
+    private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe( data => {
@@ -28,8 +31,13 @@ if (this.editForm.dirty) {
   }
 
   updateUser() {
-    this.alertify.success('Profile updated succesfully');
-    this.editForm.reset(this.user);
+    this.userService.updateUser(this.authService.decodedToken.nameid, this.user).subscribe(next => {
+      this.alertify.success('Profile updated succesfully');
+      this.editForm.reset(this.user);
+    }, error => {
+      this.alertify.error(error);
+    });
+   
   }
 
 }

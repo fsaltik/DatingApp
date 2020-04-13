@@ -1,8 +1,9 @@
+import { User } from './../_models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../_models/user';
+
 
 // const httpOptions = {
 //   headers: new HttpHeaders({
@@ -26,5 +27,9 @@ getUsers(): Observable<User[]> {
 getUser(id): Observable<User> {
   // return this.http.get<User>(this.baseUrl + 'users/' + id, httpOptions);
   return this.http.get<User>(this.baseUrl + 'users/' + id);
+}
+
+updateUser(id: number, user: User) {
+return this.http.put(this.baseUrl + 'users/' + id, user);
 }
 }
