@@ -14,7 +14,7 @@ import { FileUploader } from 'ng2-file-upload';
 })
 export class PhotoEditorComponent implements OnInit {
 @Input() photos: Photo[];
-@Output() getMemeberPhotoChange = new EventEmitter<string>();
+@Output() getMemberPhotoChange = new EventEmitter<string>();
 uploader: FileUploader;
 hasBaseDropZoneOver: boolean;
 baseUrl = environment.apiUrl;
@@ -66,7 +66,10 @@ constructor(private authService: AuthService, private userService: UserService,
         this.currentMain = this.photos.filter(p => p.isMain === true)[0];
         this.currentMain.isMain = false;
         photo.isMain = true;
-        this.getMemeberPhotoChange.emit(photo.url);
+        this.getMemberPhotoChange.emit(photo.url);
+        this.authService.changeMemberPhotoUrl(photo.url);
+        this.authService.currentUser.photoURL = photo.url;
+        localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
       }, error => {
         this.alertify.error(error);
       });
