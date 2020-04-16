@@ -6,7 +6,6 @@ import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { Photo } from './../../_models/photo';
 import { FileUploader } from 'ng2-file-upload';
 
-
 @Component({
   selector: 'app-photo-editor',
   templateUrl: './photo-editor.component.html',
@@ -54,8 +53,12 @@ constructor(private authService: AuthService, private userService: UserService,
           description: res.description,
           isMain: res.isMain
         };
-
         this.photos.push(photo);
+        if (photo.isMain) {
+          this.authService.changeMemberPhotoUrl(photo.url);
+          this.authService.currentUser.photoURL = photo.url;
+          localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
+        }
       }
     };
   }
