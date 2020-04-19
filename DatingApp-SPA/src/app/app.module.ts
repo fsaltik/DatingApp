@@ -30,6 +30,7 @@ import { MemberListComponent } from './members/member-list/member-list.component
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { RouterModule } from '@angular/router';
+import { ListsResolver } from './_resolvers/lists.resolver';
 
 
 
@@ -86,7 +87,8 @@ export function tokenGetter() {
       MemberDetailResolver,
       MemberListResolver,
       MembeEdiResolver,
-      PreventUnsavedChanges
+      PreventUnsavedChanges,
+      ListsResolver
    ],
    bootstrap: [
       AppComponent
