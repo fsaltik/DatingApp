@@ -10,7 +10,7 @@ namespace DatingApp.API.Models
 
         public User Sender { get; set; }
 
-        public int RecepientId  { get; set; }
+        public int RecipientId  { get; set; }
 
         public User Recipient { get; set; }
 
