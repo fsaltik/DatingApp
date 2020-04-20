@@ -1,11 +1,11 @@
+import { Message } from './../_models/message';
+import { PaginatedResult } from './../_models/pagination';
 import { map } from 'rxjs/operators';
 import { User } from './../_models/user';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PaginatedResult } from '../_models/pagination';
-
 
 // const httpOptions = {
 //   headers: new HttpHeaders({
@@ -80,4 +80,34 @@ deletePhoto(userId: number, id: number) {
 sendLike(id: number, recipientId: number) {
   return this.http.post(this.baseUrl + 'users/' + id + '/like/' + recipientId, {});
 }
+
+getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
+  const paginationResult: PaginatedResult<Message[]> = new PaginatedResult<Message[]>();
+
+  let params = new HttpParams();
+
+  params = params.append('MessageContainer', messageContainer);
+
+  if (page != null && itemsPerPage !=null){
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages',{observe: 'response', params})
+  .pipe(
+    map(response => {
+      paginationResult.result = response.body;
+      if (response.headers.get('Pagination') !== null) {
+        paginationResult.pagination = JSON.parse(response.headers.get('Pagination'));
+      }
+
+      return paginationResult;
+    })
+  );
+}
+
+getMessageThread(id: number, recipientId: number) {
+  return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId);
+}
+
 }

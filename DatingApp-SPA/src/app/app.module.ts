@@ -1,3 +1,5 @@
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { MessageResolver } from './_resolvers/messages.resolver.';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { MembeEdiResolver } from './_resolvers/member-edit.resolver';
@@ -33,11 +35,6 @@ import { RouterModule } from '@angular/router';
 import { ListsResolver } from './_resolvers/lists.resolver';
 
 
-
-
-
-
-
 export function tokenGetter() {
    return localStorage.getItem('token');
 }
@@ -54,7 +51,8 @@ export function tokenGetter() {
       MemberCardComponent,
       MemberDetailComponent,
       MemberEditComponent,
-      PhotoEditorComponent
+      PhotoEditorComponent,
+      MemberMessagesComponent
    ],
    imports: [
       BrowserModule,
@@ -88,7 +86,8 @@ export function tokenGetter() {
       MemberListResolver,
       MembeEdiResolver,
       PreventUnsavedChanges,
-      ListsResolver
+      ListsResolver,
+      MessageResolver
    ],
    bootstrap: [
       AppComponent
