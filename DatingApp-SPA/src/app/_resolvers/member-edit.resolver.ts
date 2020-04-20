@@ -8,7 +8,7 @@ import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
-export class MembeEdiResolver implements Resolve<User> {
+export class MemberEditResolver implements Resolve<User> {
     constructor(private userService: UserService, private authService: AuthService,
         private router: Router, private alertify: AlertifyService) {}
 

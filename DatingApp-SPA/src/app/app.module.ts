@@ -1,8 +1,8 @@
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { MessageResolver } from './_resolvers/messages.resolver.';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
-import { MembeEdiResolver } from './_resolvers/member-edit.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
@@ -84,10 +84,10 @@ export function tokenGetter() {
       UserService,
       MemberDetailResolver,
       MemberListResolver,
-      MembeEdiResolver,
       PreventUnsavedChanges,
       ListsResolver,
-      MessageResolver
+      MessageResolver,
+      MemberEditResolver
    ],
    bootstrap: [
       AppComponent
