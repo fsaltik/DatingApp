@@ -49,13 +49,10 @@ namespace DatingApp.API.Migrations
                     b.Property<DateTime>("MessageSent")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RecepientId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<bool>("RecipientDeleted")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("RecipientId")
+                    b.Property<int>("RecipientId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("SenderDeleted")
@@ -188,7 +185,8 @@ namespace DatingApp.API.Migrations
                     b.HasOne("DatingApp.API.Models.User", "Recipient")
                         .WithMany("MessagesReceived")
                         .HasForeignKey("RecipientId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("DatingApp.API.Models.User", "Sender")
                         .WithMany("MessagesSent")
